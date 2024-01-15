@@ -1,7 +1,7 @@
 import "../styles/header.css"
 import { Widget } from "../share/widgets";
 
-export function createHeader() {
+export default function createHeader() {
     const header = document.createElement("header");
     header.setAttribute("id", "header");
 
