@@ -8,7 +8,8 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Fluffy Restaurent',
-            template: './src/template.html'
+            favicon: `${__dirname}/src/assets/favicon.ico`,
+            template: './src/template.html',
         })
     ],
     output: {
@@ -19,12 +20,12 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                test: /\.(ico|png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource',
             },
             {
                 test: /\.(css)$/i,
-                use: ['style-loader', 'css-loader'],
+                use: ['style-loader', 'css-loader', "postcss-loader"],
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -33,7 +34,7 @@ module.exports = {
         ],
     },
     optimization: {
-        minimize: true,
+        minimize: false,
         minimizer: [
             new TerserPlugin({
                 terserOptions: {
@@ -46,3 +47,4 @@ module.exports = {
         ],
     },
 };
+console.log(path.resolve(__dirname, 'src/assets'))
