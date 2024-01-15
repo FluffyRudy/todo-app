@@ -1,0 +1,77 @@
+#add-button {
+    position: fixed;
+    bottom: 2vh;
+    right: 2vw;
+    width: 150px;
+    height: 150px;
+    background-image: url("../assets/add-button.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+dialog {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5vmax 0;
+    border: none;
+    border-radius: 3vmax;
+}
+
+form {
+    width: min(600px, 100vw);
+    min-height: min(500px, 100vh);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+form > input, form > textarea {
+    width: 80%;
+    padding: 2vmax 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 1vw;
+    border: none;
+    font-size: 1.4em;
+    box-sizing: border-box;
+    text-align: center;
+} 
+
+input:focus, textarea:focus {
+    border: none;
+    outline: none;
+}
+
+#todo-label:focus:invalid {
+    border: 1px solid red;
+}
+
+#todo-label:focus:valid {
+    border: 1px solid lime;
+    outline: lime;
+}
+
+#cancel-todo {
+    display: block;
+    margin: auto;
+    background-color: rgba(255, 0, 0, 1);
+}
+
+#cancel-todo, #add-todo {
+   font-size: 1.5em;
+   width: 80%;
+   height: 80px;
+   border: none;
+   border-radius: 10px;
+}
+
+#add-todo {
+    background-color: lime;
+}
+
+#todo-disc:focus {
+    text-align: left;
+}
