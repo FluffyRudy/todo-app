@@ -1,8 +1,9 @@
+import "../styles/footer.css"
 import { Widget } from "../share/widgets";
 
-function createFooter() {
+export default function createFooter() {
     const footer = document.createElement('footer');
-    const footerText = Widget.createText("Icons by https://icons8.com");
-    footerText.style.textAlign = "center";
-    footer.appendChild(footerText);
+    const footerText = Widget.createText("Icons by https://icons8.com and https://icon-icons.com", "id", "footer-text");
+    footer.appendChild(footerText)
+    return footer;
 }
