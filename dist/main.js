@@ -2,6 +2,39 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 479:
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(81);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(645);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `footer {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+}
+
+footer > p {
+    text-align: center;
+    color: #fff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.2em;
+}`, ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ 753:
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -169,7 +202,122 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
     border: none;
     cursor: pointer;
 }
-`, ""]);
+
+button {
+    cursor: pointer;
+}`, ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ 185:
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(81);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(645);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(667);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
+// Imports
+
+
+
+var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(463), __webpack_require__.b);
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `#add-button {
+    position: fixed;
+    bottom: 2vh;
+    right: 2vw;
+    width: 150px;
+    height: 150px;
+    background-image: url(${___CSS_LOADER_URL_REPLACEMENT_0___});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+dialog {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 5vmax 0;
+    border: none;
+    border-radius: 3vmax;
+}
+
+form {
+    width: min(600px, 100vw);
+    min-height: min(500px, 100vh);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+form > input, form > textarea {
+    width: 80%;
+    padding: 2vmax 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 1vw;
+    border: none;
+    font-size: 1.4em;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    text-align: center;
+} 
+
+input:focus, textarea:focus {
+    border: none;
+    outline: none;
+}
+
+#todo-label:focus:invalid {
+    border: 1px solid red;
+}
+
+#todo-label:focus:valid {
+    border: 1px solid lime;
+    outline: lime;
+}
+
+#cancel-todo {
+    display: block;
+    margin: auto;
+    background-color: rgba(255, 0, 0, 1);
+}
+
+#cancel-todo, #add-todo {
+   font-size: 1.5em;
+   width: 80%;
+   height: 80px;
+   border: none;
+   border-radius: 10px;
+}
+
+#add-todo {
+    background-color: lime;
+}
+
+#todo-disc:focus {
+    text-align: left;
+}`, ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -851,16 +999,163 @@ function createHeader() {
 }
 
 
+// EXTERNAL MODULE: ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/styles/footer.css
+var footer = __webpack_require__(479);
+;// CONCATENATED MODULE: ./src/styles/footer.css
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var footer_options = {};
+
+footer_options.styleTagTransform = (styleTagTransform_default());
+footer_options.setAttributes = (setAttributesWithoutAttributes_default());
+
+      footer_options.insert = insertBySelector_default().bind(null, "head");
+    
+footer_options.domAPI = (styleDomAPI_default());
+footer_options.insertStyleElement = (insertStyleElement_default());
+
+var footer_update = injectStylesIntoStyleTag_default()(footer/* default */.Z, footer_options);
+
+
+
+
+       /* harmony default export */ const styles_footer = (footer/* default */.Z && footer/* default */.Z.locals ? footer/* default */.Z.locals : undefined);
+
+;// CONCATENATED MODULE: ./src/components/footer.js
+
+
+
+function createFooter() {
+    const footer = document.createElement('footer');
+    const footerText = Widget.createText("Icons by https://icons8.com and https://icon-icons.com", "id", "footer-text");
+    footer.appendChild(footerText)
+    return footer;
+}
+// EXTERNAL MODULE: ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/styles/userInput.css
+var userInput = __webpack_require__(185);
+;// CONCATENATED MODULE: ./src/styles/userInput.css
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var userInput_options = {};
+
+userInput_options.styleTagTransform = (styleTagTransform_default());
+userInput_options.setAttributes = (setAttributesWithoutAttributes_default());
+
+      userInput_options.insert = insertBySelector_default().bind(null, "head");
+    
+userInput_options.domAPI = (styleDomAPI_default());
+userInput_options.insertStyleElement = (insertStyleElement_default());
+
+var userInput_update = injectStylesIntoStyleTag_default()(userInput/* default */.Z, userInput_options);
+
+
+
+
+       /* harmony default export */ const styles_userInput = (userInput/* default */.Z && userInput/* default */.Z.locals ? userInput/* default */.Z.locals : undefined);
+
+;// CONCATENATED MODULE: ./src/lib/todo.js
+class Todo {
+    constructor(label, activity, deadline=null) {
+        this.label = label;
+        this.activity = activity;
+        this.deadline = deadline;
+        this.creationDate = new Date();
+    }              
+}
+
+
+;// CONCATENATED MODULE: ./src/lib/storage.js
+class Storage {
+    static storage = {};
+
+    static getStorage() {
+        return Storage.storage;
+    }
+
+    static addToStorage(value) {
+        const id = window.crypto.getRandomValues(new Uint32Array(10))
+                        .reduce((uniqueID, ID) => {
+                            return uniqueID + ID.toString(36)
+                        }, "");
+        Storage.storage[id] = value;
+    }
+}
+
+
+;// CONCATENATED MODULE: ./src/components/input.js
+
+
+
+
+
+function displayPopUp() {
+    document.querySelector("dialog").showModal();
+}
+
+function getUserInputs() {
+    const label = document.getElementById("todo-label");
+    const discription = document.getElementById("todo-disc");
+    const deadline = document.getElementById("todo-deadline");
+    return [label.value, discription.value, deadline.valueAsDate];
+}
+
+function closePopup(e) {
+    e.preventDefault();
+    document.querySelector("dialog").close();
+}
+
+function addTodo(e) {
+    const userInput = getUserInputs();
+    const todoObj = new Todo(...userInput);
+    Storage.addToStorage(todoObj);
+    console.log(Storage.getStorage());
+    closePopup(e);
+}
+
+function TodoAddButton() {
+    return Widget.createButton("", "id", "add-button");
+}
+
+function registerEventListener() {
+    document.getElementById("add-button")
+        .addEventListener('click', displayPopUp);
+    document.getElementById("add-todo")
+        .addEventListener('click', addTodo);
+    document.getElementById("cancel-todo")
+        .addEventListener('click', closePopup);
+}
+
 ;// CONCATENATED MODULE: ./src/index.js
 
 
 
 
+
 const container = document.getElementById("container");
-const addButton = Widget.createButton("", "id", "add-button");
 
 container.appendChild(createHeader())
-document.body.appendChild(addButton);
+container.appendChild(createFooter());
+container.appendChild(TodoAddButton());
+
+registerEventListener();
 })();
 
 /******/ })()
