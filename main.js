@@ -70,6 +70,13 @@ ___CSS_LOADER_EXPORT___.push([module.id, `#header {
     max-height: 200px;
     width: 80vw;
     margin: 2vh auto;
+    opacity: 1;
+    visibility: visible;
+}
+
+#header.invisible {
+    visibility: hidden;
+    opacity: 0;
 }
 
 #menu-button {
@@ -82,6 +89,13 @@ ___CSS_LOADER_EXPORT___.push([module.id, `#header {
     border: none;
     background-color: transparent;
     cursor: pointer;
+    z-index: 2;
+    opacity: 0.7;
+}
+
+
+#menu-button:focus {
+    opacity: 1;
 }
 
 #logo {
@@ -109,6 +123,95 @@ ___CSS_LOADER_EXPORT___.push([module.id, `#header {
     font-size: 1.2em;
 }
 
+#menu-bar {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(550px, 100vw);
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#top-wrapper {
+    position: relative;
+    background: rgba(0, 0, 0, 0.4);
+    height: 150px;
+    line-height: 150px;
+}
+
+#menu-bar > ul {
+    margin-top: 6vh;
+    margin-left: 50%;
+    -webkit-transform: translateX(-80%);
+            transform: translateX(-80%);
+}
+
+#menu-bar > ul > li + li {
+    margin-top: 8vh;
+}
+
+#menu-bar > ul > li > button {
+    font-size: max(2.0em, min(2vw, 3vw));
+    font-family: monospace;
+}
+
+#menu-heading {
+    margin-top: 0;
+    font-size: max(45px, 2vmax);
+    letter-spacing: 1vw;
+    color: navajowhite;
+    margin-left: 2vw;
+}
+
+#menu-bar button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    padding: 2vmax 2vmax;
+    border-radius: 1vmax;
+}
+
+#cancel-menu {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    font-size: 2em;
+    -webkit-transition: none;
+    transition: none;
+}
+
+#cancel-menu:hover {
+    background-color: red;
+    -webkit-transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out;
+    border-radius: 1vmax;
+}
+
+#menu-bar > ul > li > button:hover {
+    background-color: navajowhite;
+    -webkit-transition: background-color 0.5s linear;
+    transition: background-color 0.5s linear;
+    color: #000;
+}
+
+#menu-bar {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition-property: visibility, opacity;
+    transition-property: visibility, opacity;
+    -webkit-transition-duration: 0.5s, 0.5s;
+            transition-duration: 0.5s, 0.5s;
+    -webkit-transition-timing-function: linear, linear;
+            transition-timing-function: linear, linear;
+}
+
+#menu-bar.visible {
+    visibility: visible;
+    opacity: 1;
+}
 
 @media only screen and (max-width: 800px) {
     #header-left-child, #header-right-child {
@@ -127,7 +230,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `#header {
     #menu-button {
         position: fixed;
         left: 0;
-        z-index: 10;
+        z-index: 8;
         opacity: 0.5;
     }
 
@@ -205,6 +308,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
 
 button {
     cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
 }`, ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
@@ -281,6 +388,7 @@ form > input, form > textarea {
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
     text-align: center;
+    margin-top: 1vh;
 } 
 
 input:focus, textarea:focus {
@@ -309,6 +417,7 @@ input:focus, textarea:focus {
    height: 80px;
    border: none;
    border-radius: 10px;
+   margin-top: 1vh;
 }
 
 #add-todo {
@@ -317,7 +426,8 @@ input:focus, textarea:focus {
 
 #todo-disc:focus {
     text-align: left;
-}`, ""]);
+}
+`, ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -969,6 +1079,47 @@ class Widget {
         setWidgetAttribute(elem, attribute, value);
         return elem;
     }
+
+    static createHeading(level, content, attribute=undefined, value=undefined) {
+        const heading = textContainedElem(level, content, attribute, value);
+        return heading;
+    }
+
+    static createList(listElements, type="ul") {
+        const createAttribute = (text) => {
+            return text.toLowerCase().replace(' ', '-');
+        }
+        const elemType = (type == "ol") ? "ol" : "ul";
+        const ul = document.createElement(elemType);
+        listElements.forEach(elem => {
+            const listElem = document.createElement("li");
+            const navBtn   = Widget.createButton(elem, "id", createAttribute(elem));
+            listElem.appendChild(navBtn);
+            ul.appendChild(listElem);
+        })
+
+        return ul;
+    }
+
+    static createNavBar(navItems, attribute=undefined, value=undefined) {
+        const nav = document.createElement("nav");
+        const navElems = Widget.createList(navItems);
+        setWidgetAttribute(nav, attribute, value);
+        nav.appendChild(navElems);
+        return nav;
+    }
+
+    static createTodoUI(obj) {
+        const container = Widget.createContainer("id", "todo-ui");
+        const marker = document.createElement("input");
+        marker.type = "checkbox";
+        const label = document.createElement("span");
+        label.appendChild(document.createTextNode(obj.label));
+        container.appendChild(marker);
+        container.appendChild(label);
+        container.style.display = "block";
+        return container;
+    }
 }
 
 
@@ -998,7 +1149,37 @@ function createHeader() {
     return header;
 }
 
+function toggleMenu() {
+    document.getElementById("menu-bar")
+        .classList.toggle("visible");
+    document.getElementById("header").classList.toggle("invisible");
+    document.getElementById("add-button").classList.toggle("invisible");
+}
 
+function createMenu() {
+    const navElemLabels = ["Notes", "Categorized", "Uncatagorized", "Trash"];
+    const navElement    = Widget.createNavBar(navElemLabels, "id", "menu-bar");
+    const headCancelContainer = Widget.createContainer("id", "top-wrapper");
+    headCancelContainer.appendChild(createMenuHeading());
+    headCancelContainer.appendChild(createMenuCancelButton());
+    navElement.insertBefore(headCancelContainer, navElement.firstChild);
+    return navElement;
+}
+
+function createMenuHeading() {
+    return Widget.createHeading("h1", "Todo Free", "id", "menu-heading");
+}
+
+function createMenuCancelButton() {
+    return Widget.createButton("X", "id", "cancel-menu");
+}
+
+function registerMenuEventListers() {
+    document.getElementById("menu-button")
+        .addEventListener('click', toggleMenu)
+    document.getElementById("cancel-menu")
+        .addEventListener('click', toggleMenu);
+}
 // EXTERNAL MODULE: ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/styles/footer.css
 var footer = __webpack_require__(479);
 ;// CONCATENATED MODULE: ./src/styles/footer.css
@@ -1084,18 +1265,24 @@ class Todo {
 
 ;// CONCATENATED MODULE: ./src/lib/storage.js
 class Storage {
-    static storage = {};
+    static  counter = 0;
+    static todoObjstorage = {};
 
-    static getStorage() {
-        return Storage.storage;
+    static getObjStorage() {
+        return Storage.todoObjstorage;
     }
 
-    static addToStorage(value) {
+    static getUIStorage() {
+        return Storage.todoUIStorage;
+    }
+
+    static addToStorage(value, uiValue) {
         const id = window.crypto.getRandomValues(new Uint32Array(10))
                         .reduce((uniqueID, ID) => {
                             return uniqueID + ID.toString(36)
                         }, "");
-        Storage.storage[id] = value;
+        Storage.todoObjstorage[id] = value;
+
     }
 }
 
@@ -1108,6 +1295,23 @@ class Storage {
 
 function displayPopUp() {
     document.querySelector("dialog").showModal();
+}
+
+function displayErrorPopup(erroMsg) {
+    const popup = document.createElement("dialog");
+    popup.style.width = "min(600px, 100vw)";
+    popup.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+    document.body.appendChild(popup);
+    const popupContent = Widget.createText(erroMsg);
+    popupContent.style.fontSize = "3em";
+    popupContent.style.fontFamily = "monospace";
+    popupContent.style.color = "white";
+    popupContent.style.textAlign = "center";
+    popup.appendChild(popupContent);
+    popup.showModal();
+    setTimeout(() => {
+        popup.close()
+    }, 2000);
 }
 
 function getUserInputs() {
@@ -1125,8 +1329,16 @@ function closePopup(e) {
 function addTodo(e) {
     const userInput = getUserInputs();
     const todoObj = new Todo(...userInput);
-    Storage.addToStorage(todoObj);
-    console.log(Storage.getStorage());
+    if (userInput[0].length < 4) {
+        e.preventDefault();
+        displayErrorPopup("Provide proper label");
+        return;
+    } else if (userInput[1].length < 4) {
+        e.preventDefault();
+        displayErrorPopup("Provide proper description");
+        return;
+    }
+    Storage.addToStorage(todoObj, Widget.createTodoUI);
     closePopup(e);
 }
 
@@ -1134,7 +1346,7 @@ function TodoAddButton() {
     return Widget.createButton("", "id", "add-button");
 }
 
-function registerEventListener() {
+function registerUserInputListener() {
     document.getElementById("add-button")
         .addEventListener('click', displayPopUp);
     document.getElementById("add-todo")
@@ -1149,13 +1361,17 @@ function registerEventListener() {
 
 
 
+
+
 const container = document.getElementById("container");
 
+container.appendChild(createMenu());
 container.appendChild(createHeader())
 container.appendChild(createFooter());
 container.appendChild(TodoAddButton());
 
-registerEventListener();
+registerMenuEventListers();
+registerUserInputListener();
 })();
 
 /******/ })()
