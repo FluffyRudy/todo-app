@@ -7,6 +7,13 @@
     max-height: 200px;
     width: 80vw;
     margin: 2vh auto;
+    opacity: 1;
+    visibility: visible;
+}
+
+#header.invisible {
+    visibility: hidden;
+    opacity: 0;
 }
 
 #menu-button {
@@ -19,6 +26,13 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+    z-index: 2;
+    opacity: 0.7;
+}
+
+
+#menu-button:focus {
+    opacity: 1;
 }
 
 #logo {
@@ -42,6 +56,87 @@
     font-size: 1.2em;
 }
 
+#menu-bar {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: min(550px, 100vw);
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#top-wrapper {
+    position: relative;
+    background: rgba(0, 0, 0, 0.4);
+    height: 150px;
+    line-height: 150px;
+}
+
+#menu-bar > ul {
+    margin-top: 6vh;
+    margin-left: 50%;
+    transform: translateX(-80%);
+}
+
+#menu-bar > ul > li + li {
+    margin-top: 8vh;
+}
+
+#menu-bar > ul > li > button {
+    font-size: clamp(2.0em, 2vw, 3vw);
+    font-family: monospace;
+}
+
+#menu-heading {
+    margin-top: 0;
+    font-size: max(45px, 2vmax);
+    letter-spacing: 1vw;
+    color: navajowhite;
+    margin-left: 2vw;
+}
+
+#menu-bar button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    padding: 2vmax 2vmax;
+    border-radius: 1vmax;
+}
+
+#cancel-menu {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-size: 2em;
+    transition: none;
+}
+
+#cancel-menu:hover {
+    background-color: red;
+    transition: background-color 0.5s ease-in-out;
+    border-radius: 1vmax;
+}
+
+#menu-bar > ul > li > button:hover {
+    background-color: navajowhite;
+    transition: background-color 0.5s linear;
+    color: #000;
+}
+
+#menu-bar {
+    visibility: hidden;
+    opacity: 0;
+    transition-property: visibility, opacity;
+    transition-duration: 0.5s, 0.5s;
+    transition-timing-function: linear, linear;
+}
+
+#menu-bar.visible {
+    visibility: visible;
+    opacity: 1;
+}
 
 @media only screen and (max-width: 800px) {
     #header-left-child, #header-right-child {
@@ -57,7 +152,7 @@
     #menu-button {
         position: fixed;
         left: 0;
-        z-index: 10;
+        z-index: 8;
         opacity: 0.5;
     }
 

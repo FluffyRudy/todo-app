@@ -38,6 +38,7 @@ form > input, form > textarea {
     font-size: 1.4em;
     box-sizing: border-box;
     text-align: center;
+    margin-top: 1vh;
 } 
 
 input:focus, textarea:focus {
@@ -66,6 +67,7 @@ input:focus, textarea:focus {
    height: 80px;
    border: none;
    border-radius: 10px;
+   margin-top: 1vh;
 }
 
 #add-todo {
