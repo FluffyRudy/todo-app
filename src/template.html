@@ -6,16 +6,16 @@
     <title>Todo Free</title>
 </head>
 <body>
-    <div id="container">
-        <dialog>
-            <form>
-                <input type="text" id="todo-label" placeholder="Label" pattern="\w{4,}" required>
-                <textarea name="description" id="todo-disc" rows="5" placeholder="Description"></textarea>
-                <input type="text" id="todo-deadline" placeholder="Deadline" onblur="(this.type='text')" onfocus="(this.type='date')">
-                <button id="add-todo">Save</button>
-            </form>
+    <dialog>
+        <form>
+            <input type="text" id="todo-label" placeholder="Label" pattern="\w{4,}" required>
+            <textarea name="description" id="todo-disc" rows="5" placeholder="Description"></textarea>
+            <input type="text" id="todo-deadline" placeholder="Deadline" onblur="(this.type='text')" onfocus="(this.type='date')">
+            <button id="add-todo">Save</button>
             <button id="cancel-todo">Cancel</button>
-        </dialog>
+        </form>
+    </dialog>
+    <div id="container">
     </div>
 </body>
 </html>
