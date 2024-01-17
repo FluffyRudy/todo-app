@@ -1,16 +1,18 @@
 export class Storage {
-    static storage = {};
+    static  todoCounter = 0;
+    static todoObjstorage = {};
 
-    static getStorage() {
-        return Storage.storage;
+    static getObjStorage() {
+        return Storage.todoObjstorage;
     }
 
-    static addToStorage(value) {
+    static addToStorage(value, uiValue) {
         const id = window.crypto.getRandomValues(new Uint32Array(10))
                         .reduce((uniqueID, ID) => {
                             return uniqueID + ID.toString(36)
                         }, "");
-        Storage.storage[id] = value;
+        Storage.todoObjstorage[id] = value;
+        Storage.todoCounter++;
     }
 }
 
