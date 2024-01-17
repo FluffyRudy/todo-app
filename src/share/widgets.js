@@ -35,5 +35,34 @@ export class Widget {
         setWidgetAttribute(elem, attribute, value);
         return elem;
     }
+
+    static createHeading(level, content, attribute=undefined, value=undefined) {
+        const heading = textContainedElem(level, content, attribute, value);
+        return heading;
+    }
+
+    static createList(listElements, type="ul") {
+        const createAttribute = (text) => {
+            return text.toLowerCase().replace(' ', '-');
+        }
+        const elemType = (type == "ol") ? "ol" : "ul";
+        const ul = document.createElement(elemType);
+        listElements.forEach(elem => {
+            const listElem = document.createElement("li");
+            const navBtn   = Widget.createButton(elem, "id", createAttribute(elem));
+            listElem.appendChild(navBtn);
+            ul.appendChild(listElem);
+        })
+
+        return ul;
+    }
+
+    static createNavBar(navItems, attribute=undefined, value=undefined) {
+        const nav = document.createElement("nav");
+        const navElems = Widget.createList(navItems);
+        setWidgetAttribute(nav, attribute, value);
+        nav.appendChild(navElems);
+        return nav;
+    }
 }
 
