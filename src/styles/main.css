@@ -32,3 +32,35 @@ button {
 ul {
     list-style-type: none;
 }
+
+#container {
+    margin-top: 3vh;
+    min-height: 80vh;
+}
+
+#todoui-wrapper {
+    width: min(90vw);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: min(4vw, 40px);
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 3vmax;
+    margin: 2vh auto;
+}
+
+#todo-details {
+    background-color: transparent;
+    color: white;
+    font-size: min(4vw, 40px);			
+    height: fit-content;
+    border: 3px solid limegreen;
+    border-radius: 20px;
+    padding: 1vmax;
+}
+
+#todo-status {
+    outline: transparent;
+    accent-color: lime;
+    transform: scale(3);
+}

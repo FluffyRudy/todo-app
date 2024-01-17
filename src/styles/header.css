@@ -9,6 +9,8 @@
     margin: 2vh auto;
     opacity: 1;
     visibility: visible;
+    position: relative;
+    height: max-content;
 }
 
 #header.invisible {
@@ -145,8 +147,9 @@
 
     #header {
         position: relative;
-        top: -2vmax;
+        top: 0;
         flex-direction: column;
+        margin-top: 0;
     }
 
     #menu-button {
@@ -161,8 +164,8 @@
     }
 
     #logo {
-        font-size: 10vw;
-        top: 2vmax;
+        font-size: 5vw;
+        margin: 0;
     }
 
     #search-bar, #search-button {

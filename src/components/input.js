@@ -36,6 +36,11 @@ function getUserInputs() {
     return [label.value, discription.value, deadline.valueAsDate];
 }
 
+export function addTodoUI(todoObj) {
+    document.getElementById("container")
+        .appendChild(Widget.createTodoUI(todoObj));
+}
+
 function addTodo(e) {
     const userInput = getUserInputs();
     const todoObj = new Todo(...userInput);
@@ -48,7 +53,8 @@ function addTodo(e) {
         displayErrorPopup("Provide proper description");
         return;
     }
-    Storage.addToStorage(todoObj, Widget.createTodoUI);
+    Storage.addToStorage(todoObj);
+    addTodoUI(todoObj);
     closePopup(e);
 }
 

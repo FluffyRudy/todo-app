@@ -64,5 +64,22 @@ export class Widget {
         nav.appendChild(navElems);
         return nav;
     }
+
+    static createTodoUI(todoObj) {
+        const wrapper = Widget.createContainer("id", "todoui-wrapper");
+        wrapper.setAttribute("todo-id", todoObj.id);
+        const status = document.createElement('input');
+        status.type  = "checkbox";
+        status.setAttribute("id", "todo-status");
+        const label  = Widget.createText(todoObj.label, "id", "todo-label");
+        const details = Widget.createButton("Details", "id", "todo-details");
+        
+        [status, label, details]
+            .forEach(elem => {
+                wrapper.appendChild(elem);
+            })
+
+        return wrapper;
+    }
 }
 
