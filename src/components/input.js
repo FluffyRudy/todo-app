@@ -7,6 +7,11 @@ function displayPopUp() {
     document.querySelector("dialog").showModal();
 }
 
+function closePopup(e) {
+    e.preventDefault();
+    document.querySelector("dialog").close();
+}
+
 function displayErrorPopup(erroMsg) {
     const popup = document.createElement("dialog");
     popup.style.width = "min(600px, 100vw)";
@@ -31,11 +36,6 @@ function getUserInputs() {
     return [label.value, discription.value, deadline.valueAsDate];
 }
 
-function closePopup(e) {
-    e.preventDefault();
-    document.querySelector("dialog").close();
-}
-
 function addTodo(e) {
     const userInput = getUserInputs();
     const todoObj = new Todo(...userInput);
@@ -48,7 +48,7 @@ function addTodo(e) {
         displayErrorPopup("Provide proper description");
         return;
     }
-    Storage.addToStorage(todoObj);
+    Storage.addToStorage(todoObj, Widget.createTodoUI);
     closePopup(e);
 }
 
@@ -56,7 +56,7 @@ export function TodoAddButton() {
     return Widget.createButton("", "id", "add-button");
 }
 
-export function registerEventListener() {
+export function registerUserInputListener() {
     document.getElementById("add-button")
         .addEventListener('click', displayPopUp);
     document.getElementById("add-todo")
