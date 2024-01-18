@@ -62,5 +62,5 @@ ul {
 #todo-status {
     outline: transparent;
     accent-color: lime;
-    transform: scale(3);
+    transform: scale(2.5);
 }
