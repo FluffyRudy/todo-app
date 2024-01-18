@@ -1,6 +1,7 @@
 export class Storage {
     static  todoCounter = 0;
     static todoObjstorage = {};
+    static todoTrashStorage = {};
 
     static getObjStorage() {
         return Storage.todoObjstorage;
@@ -9,7 +10,12 @@ export class Storage {
     static addToStorage(value) {
         const id = Storage.generateUniqueStorageId();
         value.setID(id);
-        Storage.todoObjstorage[id] = value;
+        if (Storage.todoObjstorage.hasOwnProperty(value.category)) {
+            Storage.todoObjstorage[value.category].push(value);
+        } else {
+            Storage.todoObjstorage[value.category] = [];
+            Storage.todoObjstorage[value.category].push(value);
+        }
         Storage.todoCounter++;
     }
 
@@ -33,6 +39,30 @@ export class Storage {
             attempt++;
         }
         return id;
+    }
+
+    static removeTodoElem(category, id) {
+        const index = Storage.getElemBy(category, id);
+        if (index == -1)
+            return;
+        Storage.todoObjstorage[category].splice(index, 1);
+        if (Storage.todoObjstorage[category].length < 1) {
+            delete  Storage.todoObjstorage[category];
+        }
+        
+                
+    }
+
+    static getElemBy(category, id) {
+        if (Storage.todoObjstorage.hasOwnProperty(category)) {
+            for (let i = 0; i < Storage.todoObjstorage[category].length; i++) {
+                const elem = Storage.todoObjstorage[category][i];
+                if (elem['id'] === id) {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 }
 

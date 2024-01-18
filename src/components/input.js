@@ -31,9 +31,15 @@ function displayErrorPopup(erroMsg) {
 
 function getUserInputs() {
     const label = document.getElementById("todo-label");
+    const category = document.getElementById("category");
     const discription = document.getElementById("todo-disc");
     const deadline = document.getElementById("todo-deadline");
-    return [label.value, discription.value, deadline.valueAsDate];
+    return [
+        label.value, 
+        discription.value, 
+        category.value,
+        deadline.value
+    ];
 }
 
 export function addTodoUI(todoObj) {

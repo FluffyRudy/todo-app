@@ -72,6 +72,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, `#header {
     margin: 2vh auto;
     opacity: 1;
     visibility: visible;
+    position: relative;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
 }
 
 #header.invisible {
@@ -220,11 +224,12 @@ ___CSS_LOADER_EXPORT___.push([module.id, `#header {
 
     #header {
         position: relative;
-        top: -2vmax;
+        top: 0;
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
             -ms-flex-direction: column;
                 flex-direction: column;
+        margin-top: 0;
     }
 
     #menu-button {
@@ -239,8 +244,8 @@ ___CSS_LOADER_EXPORT___.push([module.id, `#header {
     }
 
     #logo {
-        font-size: 10vw;
-        top: 2vmax;
+        font-size: 5vw;
+        margin: 0;
     }
 
     #search-bar, #search-button {
@@ -312,7 +317,64 @@ button {
 
 ul {
     list-style-type: none;
-}`, ""]);
+}
+
+#container {
+    margin-top: 3vh;
+    min-height: 80vh;
+}
+
+#todoui-wrapper {
+    width: 90vw;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    font-size: min(4vw, 40px);
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 3vmax;
+    margin: 5vh auto;
+    position: relative;
+    color: #fff;
+}
+
+#todoui-wrapper:hover  #category-popup {
+    visibility: visible;
+    z-index: 15;
+}
+
+#todo-details {
+    background-color: transparent;
+    font-size: min(4vw, 40px);			
+    height: -webkit-fit-content;			
+    height: -moz-fit-content;			
+    height: fit-content;
+    border: 3px solid limegreen;
+    border-radius: 20px;
+    padding: 1vmax;
+    color: #fff;
+}
+
+#todo-status {
+    outline: transparent;
+    accent-color: lime;
+    -webkit-transform: scale(2.5);
+            transform: scale(2.5);
+}
+
+#category-popup {
+    margin: 0 0;
+    position: absolute;
+    visibility: hidden;
+    top: -3vh;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+`, ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1109,16 +1171,23 @@ class Widget {
         return nav;
     }
 
-    static createTodoUI(obj) {
-        const container = Widget.createContainer("id", "todo-ui");
-        const marker = document.createElement("input");
-        marker.type = "checkbox";
-        const label = document.createElement("span");
-        label.appendChild(document.createTextNode(obj.label));
-        container.appendChild(marker);
-        container.appendChild(label);
-        container.style.display = "block";
-        return container;
+    static createTodoUI(todoObj) {
+        const wrapper = Widget.createContainer("id", "todoui-wrapper");
+        wrapper.setAttribute("todo-id", todoObj.id);
+        const status = document.createElement('input');
+        status.type  = "checkbox";
+        status.setAttribute("id", "todo-status");
+        const category = Widget.createText("Category: " + todoObj.category, 'id', 'category-popup');
+        const label  = Widget.createText(todoObj.label , "id", "todo-label");
+        const details = Widget.createButton("Details", "id", "todo-details");
+        
+        wrapper.appendChild(category);
+        [status, label, details]
+            .forEach(elem => {
+                wrapper.appendChild(elem);
+            })
+
+        return wrapper;
     }
 }
 
@@ -1254,35 +1323,63 @@ var userInput_update = injectStylesIntoStyleTag_default()(userInput/* default */
 
 ;// CONCATENATED MODULE: ./src/lib/todo.js
 class Todo {
-    constructor(label, activity, deadline=null) {
+    constructor(label, activity, category, deadline=null) {
         this.label = label;
+        this.category = category.trim() === "" ? "all" : category; 
         this.activity = activity;
         this.deadline = deadline;
         this.creationDate = new Date();
-    }              
+        this.id = null;
+    }           
+    
+    setID(id) {
+        this.id = id;
+    }
 }
 
 
 ;// CONCATENATED MODULE: ./src/lib/storage.js
 class Storage {
-    static  counter = 0;
+    static  todoCounter = 0;
     static todoObjstorage = {};
 
     static getObjStorage() {
         return Storage.todoObjstorage;
     }
 
-    static getUIStorage() {
-        return Storage.todoUIStorage;
+    static addToStorage(value) {
+        const id = Storage.generateUniqueStorageId();
+        value.setID(id);
+        if (Storage.todoObjstorage.hasOwnProperty(value.category)) {
+            Storage.todoObjstorage[value.category].push(value);
+        } else {
+            Storage.todoObjstorage[value.category] = [];
+            Storage.todoObjstorage[value.category].push(value);
+        }
+        console.log(this.todoObjstorage)
+        Storage.todoCounter++;
     }
 
-    static addToStorage(value, uiValue) {
-        const id = window.crypto.getRandomValues(new Uint32Array(10))
-                        .reduce((uniqueID, ID) => {
-                            return uniqueID + ID.toString(36)
-                        }, "");
-        Storage.todoObjstorage[id] = value;
+    static generateStorageId(iterableNum=2) {
+        return window.crypto.getRandomValues(new Uint32Array(iterableNum))
+            .reduce((uniqueID, ID) => {
+                return uniqueID + ID.toString(36)
+        }, "");
+    }
 
+    static generateUniqueStorageId() {
+        let iterableNum = 2;
+        let id = Storage.generateStorageId(iterableNum);
+        let attempt = 1;
+        while (Storage.todoObjstorage.hasOwnProperty(id)) {
+            id = Storage.generateStorageId();
+            if (attempt % 10 == 0) {
+                iterableNum++;
+                attempt = 1;
+            }
+            attempt++;
+        }
+        return id;
     }
 }
 
@@ -1295,6 +1392,11 @@ class Storage {
 
 function displayPopUp() {
     document.querySelector("dialog").showModal();
+}
+
+function closePopup(e) {
+    e.preventDefault();
+    document.querySelector("dialog").close();
 }
 
 function displayErrorPopup(erroMsg) {
@@ -1316,14 +1418,20 @@ function displayErrorPopup(erroMsg) {
 
 function getUserInputs() {
     const label = document.getElementById("todo-label");
+    const category = document.getElementById("category");
     const discription = document.getElementById("todo-disc");
     const deadline = document.getElementById("todo-deadline");
-    return [label.value, discription.value, deadline.valueAsDate];
+    return [
+        label.value, 
+        discription.value, 
+        category.value,
+        deadline.value
+    ];
 }
 
-function closePopup(e) {
-    e.preventDefault();
-    document.querySelector("dialog").close();
+function addTodoUI(todoObj) {
+    document.getElementById("container")
+        .appendChild(Widget.createTodoUI(todoObj));
 }
 
 function addTodo(e) {
@@ -1338,7 +1446,8 @@ function addTodo(e) {
         displayErrorPopup("Provide proper description");
         return;
     }
-    Storage.addToStorage(todoObj, Widget.createTodoUI);
+    Storage.addToStorage(todoObj);
+    addTodoUI(todoObj);
     closePopup(e);
 }
 
@@ -1363,12 +1472,13 @@ function registerUserInputListener() {
 
 
 
+
 const container = document.getElementById("container");
 
-container.appendChild(createMenu());
-container.appendChild(createHeader())
-container.appendChild(createFooter());
-container.appendChild(TodoAddButton());
+document.body.insertBefore(TodoAddButton(), container);
+document.body.insertBefore(createHeader(), container)
+document.body.insertBefore(createMenu(), container);
+document.body.appendChild(createFooter());
 
 registerMenuEventListers();
 registerUserInputListener();

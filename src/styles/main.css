@@ -39,28 +39,87 @@ ul {
 }
 
 #todoui-wrapper {
-    width: min(90vw);
+    width: 90vw;
     display: flex;
     justify-content: space-around;
     align-items: center;
     font-size: min(4vw, 40px);
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 3vmax;
-    margin: 2vh auto;
+    margin: 6vh auto 0 auto;
+    position: relative;
+    color: #fff;
+}
+
+#todoui-wrapper:hover  #category-popup {
+    visibility: visible;
+    opacity: 1;
 }
 
 #todo-details {
-    background-color: transparent;
-    color: white;
+    background-color: rgba(0, 0, 0, 0.3);
     font-size: min(4vw, 40px);			
     height: fit-content;
     border: 3px solid limegreen;
     border-radius: 20px;
     padding: 1vmax;
+    color: #fff;
+}
+
+#todo-details:hover {
+    background-color: rgba(0, 0, 0, 1);
 }
 
 #todo-status {
     outline: transparent;
     accent-color: lime;
     transform: scale(2.5);
+}
+
+#todo-status:checked + p {
+    text-decoration: line-through;
+}
+
+#category-popup {
+    margin: 0 0;
+    position: absolute;
+    visibility: hidden;
+    transform: translateY(-170%);
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 2vh;
+    padding: 0 1vmax;
+    transition: all 0.5s ease;
+    opacity: 0;
+    background-color: tomato;
+}
+
+#delete-todoui {
+    background-image: url("../assets/trash.svg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 5vmax;
+    height: 5vmax;
+    border-radius: 2.5vmax;
+    border: 1px solid lime;
+}
+
+#detail-info-box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: tomato;
+    color: #fff;
+    border-radius: 2vmax;
+    padding: 1vmax;
+    text-align: center;
+    font-size: 3vmax;
+    font-family: monospace;
+}
+
+#detail-info-box > *{
+    background-color: rgba(243, 85, 57, 0.829);
+    color: #fff;
+    padding: 1vmax;
 }

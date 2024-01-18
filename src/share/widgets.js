@@ -71,15 +71,36 @@ export class Widget {
         const status = document.createElement('input');
         status.type  = "checkbox";
         status.setAttribute("id", "todo-status");
-        const label  = Widget.createText(todoObj.label, "id", "todo-label");
+        const category = Widget.createText("Category: " + todoObj.category, 'id', 'category-popup');
+        wrapper.setAttribute("category", todoObj.category);
+        const label  = Widget.createText(todoObj.label , "id", "todo-label");
         const details = Widget.createButton("Details", "id", "todo-details");
-        
-        [status, label, details]
+        const deleteBtn = Widget.createButton("", "id", "delete-todoui");
+
+        wrapper.appendChild(category);
+        [status, label, details, deleteBtn]
             .forEach(elem => {
                 wrapper.appendChild(elem);
             })
 
         return wrapper;
+    }
+
+    static createTodoInfoBox(todoObj) {
+        const infoBox = Widget.createContainer("id", "detail-info-box");
+        const todoObjFormatted = {
+            'Label': todoObj.label,
+            'Category': todoObj.category,
+            'Description': todoObj.activity,
+            'Creation date': todoObj.creationDate,
+            'Deadline': todoObj.deadline
+        };
+        for (let elem in todoObjFormatted) {
+            infoBox.appendChild(
+                Widget.createText(`${elem}: ${todoObjFormatted[elem]}`)
+            )
+        }
+        return infoBox;
     }
 }
 
