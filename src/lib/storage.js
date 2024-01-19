@@ -42,18 +42,16 @@ export class Storage {
     }
 
     static removeTodoElem(category, id) {
-        const index = Storage.getElemBy(category, id);
+        const index = Storage.getElemByCatId(category, id);
         if (index == -1)
             return;
         Storage.todoObjstorage[category].splice(index, 1);
         if (Storage.todoObjstorage[category].length < 1) {
             delete  Storage.todoObjstorage[category];
-        }
-        
-                
+        }        
     }
 
-    static getElemBy(category, id) {
+    static getElemByCatId(category, id) {
         if (Storage.todoObjstorage.hasOwnProperty(category)) {
             for (let i = 0; i < Storage.todoObjstorage[category].length; i++) {
                 const elem = Storage.todoObjstorage[category][i];
@@ -63,6 +61,27 @@ export class Storage {
             }
         }
         return -1;
+    }
+
+    static getElemByCategory(category) {
+        if (Storage.todoObjstorage.hasOwnProperty(category)) {
+            return Storage.todoObjstorage[category];            
+        }
+        return null;
+    }
+
+    static searchElement(searchStr) {
+        const searchedResult = []
+        const re = new RegExp(searchStr, 'i');
+        for (let category in Storage.todoObjstorage) {
+            const currentCategory = Storage.getElemByCategory(category);
+            if (currentCategory === null) return;
+            for (let elem of currentCategory) {
+                if (re.test(elem.label) || re.test(elem.activity) || re.test(elem.category))
+                    searchedResult.push(elem);
+            }
+        }
+        return searchedResult;
     }
 }
 

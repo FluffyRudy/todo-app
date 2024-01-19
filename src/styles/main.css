@@ -38,7 +38,7 @@ ul {
     min-height: 80vh;
 }
 
-#todoui-wrapper {
+.todoui-wrapper {
     width: 90vw;
     display: flex;
     justify-content: space-around;
@@ -51,7 +51,7 @@ ul {
     color: #fff;
 }
 
-#todoui-wrapper:hover  #category-popup {
+.todoui-wrapper:hover  #category-popup {
     visibility: visible;
     opacity: 1;
 }

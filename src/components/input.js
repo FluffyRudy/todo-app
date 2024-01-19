@@ -42,11 +42,6 @@ function getUserInputs() {
     ];
 }
 
-export function addTodoUI(todoObj) {
-    document.getElementById("container")
-        .appendChild(Widget.createTodoUI(todoObj));
-}
-
 function addTodo(e) {
     const userInput = getUserInputs();
     const todoObj = new Todo(...userInput);
@@ -64,6 +59,32 @@ function addTodo(e) {
     closePopup(e);
 }
 
+function searchTodo() {
+    const searchValue = document.getElementById("search-bar").value;
+    const searchedResult = Storage.searchElement(searchValue);
+    if (searchedResult.length > 0) {
+        const parentElem = document.getElementById("container");
+        while (parentElem.firstChild) {
+            parentElem.removeChild(parentElem.firstChild);
+        }
+        for (let todoObj of searchedResult) {
+            setTimeout( () => {
+                parentElem.appendChild(
+                    Widget.createTodoUI(todoObj)
+                )
+            }, 400);
+        }
+    } else {
+        alert("not found");
+    }
+}
+
+
+export function addTodoUI(todoObj) {
+    document.getElementById("container")
+        .appendChild(Widget.createTodoUI(todoObj));
+}
+
 export function TodoAddButton() {
     return Widget.createButton("", "id", "add-button");
 }
@@ -75,4 +96,6 @@ export function registerUserInputListener() {
         .addEventListener('click', addTodo);
     document.getElementById("cancel-todo")
         .addEventListener('click', closePopup);
+    document.getElementById("search-button")
+        .addEventListener('click', searchTodo);
 }

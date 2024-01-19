@@ -41,12 +41,13 @@ export class Widget {
         return heading;
     }
 
-    static createList(listElements, type="ul") {
+    static createList(listElements, attribute=undefined, value=undefined) {
         const createAttribute = (text) => {
             return text.toLowerCase().replace(' ', '-');
         }
-        const elemType = (type == "ol") ? "ol" : "ul";
+        const elemType = "ul";
         const ul = document.createElement(elemType);
+        setWidgetAttribute(ul, attribute, value);
         listElements.forEach(elem => {
             const listElem = document.createElement("li");
             const navBtn   = Widget.createButton(elem, "id", createAttribute(elem));
@@ -59,14 +60,14 @@ export class Widget {
 
     static createNavBar(navItems, attribute=undefined, value=undefined) {
         const nav = document.createElement("nav");
-        const navElems = Widget.createList(navItems);
+        const navElems = Widget.createList(navItems, "id", "menubar-buttons");
         setWidgetAttribute(nav, attribute, value);
         nav.appendChild(navElems);
         return nav;
     }
 
     static createTodoUI(todoObj) {
-        const wrapper = Widget.createContainer("id", "todoui-wrapper");
+        const wrapper = Widget.createContainer("class", "todoui-wrapper");
         wrapper.setAttribute("todo-id", todoObj.id);
         const status = document.createElement('input');
         status.type  = "checkbox";
