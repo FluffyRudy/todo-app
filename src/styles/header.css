@@ -145,15 +145,8 @@
         display: block;
     }
 
-    #header-right-child {
-        width: 65vw;
-    }
-
     #header {
-        position: relative;
-        top: 0;
         flex-direction: column;
-        margin-top: 0;
     }
 
     #menu-button {
@@ -177,13 +170,5 @@
     #search-bar, #search-button {
         display: block;
         margin: auto;
-    }
-
-    #search-bar {
-        padding: 2vh 0;
-    }
-
-    #search-button {
-        margin-top: 2vh;
     }
 }
