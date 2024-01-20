@@ -1,6 +1,5 @@
 # todo-app
-Simple todo application made using Javascript
-
+Simple todo application made using Javascript and Bundled with webpack
 
 # Todo List Application
 
@@ -30,10 +29,7 @@ The application uses the localStorage web API to store todos. This allows the us
 A future enhancement for this application is the implementation of a priority feature for the todo items. This will allow users to set the priority of each task, helping them to focus on the most important tasks first.
 
 ## Getting Started
-To get started with this project, clone the repository and open `index.html` in your browser.
+To get started with this project, clone the repository and open `index.html` in your browser and enjoy.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-## License
-MIT
