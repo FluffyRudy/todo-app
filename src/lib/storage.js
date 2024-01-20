@@ -1,7 +1,4 @@
 export class Storage {
-    static todoCounter = 0;
-    static todoTrashStorage = {};
-
     static getObjStorage() {
         return JSON.parse(localStorage.getItem('todoObjStorage')) || {};
     }
@@ -17,7 +14,6 @@ export class Storage {
             todoObjStorage[value.category].push(value);
         }
         localStorage.setItem('todoObjStorage', JSON.stringify(todoObjStorage));
-        Storage.todoCounter++;
     }
 
     static generateStorageId(iterableNum=2) {
