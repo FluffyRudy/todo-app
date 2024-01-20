@@ -13,7 +13,7 @@ function handleTodoEvents(event) {
         parentElem.remove();
     } else if (event.target.getAttribute("id") == "todo-details") {
         const infoBox = Widget.createTodoInfoBox(
-            Storage.todoObjstorage[category][Storage.getElemByCatId(category, id)]
+            Storage.getObjStorage()[category][Storage.getElemByCatId(category, id)]
         );
         if (!document.getElementById("detail-info-box")) {
             document.getElementById("container").appendChild(infoBox);

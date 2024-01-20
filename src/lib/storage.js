@@ -1,21 +1,22 @@
 export class Storage {
-    static  todoCounter = 0;
-    static todoObjstorage = {};
+    static todoCounter = 0;
     static todoTrashStorage = {};
 
     static getObjStorage() {
-        return Storage.todoObjstorage;
+        return JSON.parse(localStorage.getItem('todoObjStorage')) || {};
     }
 
     static addToStorage(value) {
         const id = Storage.generateUniqueStorageId();
         value.setID(id);
-        if (Storage.todoObjstorage.hasOwnProperty(value.category)) {
-            Storage.todoObjstorage[value.category].push(value);
+        let todoObjStorage = Storage.getObjStorage();
+        if (todoObjStorage.hasOwnProperty(value.category)) {
+            todoObjStorage[value.category].push(value);
         } else {
-            Storage.todoObjstorage[value.category] = [];
-            Storage.todoObjstorage[value.category].push(value);
+            todoObjStorage[value.category] = [];
+            todoObjStorage[value.category].push(value);
         }
+        localStorage.setItem('todoObjStorage', JSON.stringify(todoObjStorage));
         Storage.todoCounter++;
     }
 
@@ -30,7 +31,8 @@ export class Storage {
         let iterableNum = 2;
         let id = Storage.generateStorageId(iterableNum);
         let attempt = 1;
-        while (Storage.todoObjstorage.hasOwnProperty(id)) {
+        let todoObjStorage = Storage.getObjStorage();
+        while (todoObjStorage.hasOwnProperty(id)) {
             id = Storage.generateStorageId();
             if (attempt % 10 == 0) {
                 iterableNum++;
@@ -42,19 +44,22 @@ export class Storage {
     }
 
     static removeTodoElem(category, id) {
+        let todoObjStorage = Storage.getObjStorage();
         const index = Storage.getElemByCatId(category, id);
         if (index == -1)
             return;
-        Storage.todoObjstorage[category].splice(index, 1);
-        if (Storage.todoObjstorage[category].length < 1) {
-            delete  Storage.todoObjstorage[category];
-        }        
+        todoObjStorage[category].splice(index, 1);
+        if (todoObjStorage[category].length < 1) {
+            delete  todoObjStorage[category];
+        }
+        localStorage.setItem('todoObjStorage', JSON.stringify(todoObjStorage));
     }
 
     static getElemByCatId(category, id) {
-        if (Storage.todoObjstorage.hasOwnProperty(category)) {
-            for (let i = 0; i < Storage.todoObjstorage[category].length; i++) {
-                const elem = Storage.todoObjstorage[category][i];
+        let todoObjStorage = Storage.getObjStorage();
+        if (todoObjStorage.hasOwnProperty(category)) {
+            for (let i = 0; i < todoObjStorage[category].length; i++) {
+                const elem = todoObjStorage[category][i];
                 if (elem['id'] === id) {
                     return i;
                 }
@@ -64,8 +69,9 @@ export class Storage {
     }
 
     static getElemByCategory(category) {
-        if (Storage.todoObjstorage.hasOwnProperty(category)) {
-            return Storage.todoObjstorage[category];            
+        let todoObjStorage = Storage.getObjStorage();
+        if (todoObjStorage.hasOwnProperty(category)) {
+            return todoObjStorage[category];            
         }
         return null;
     }
@@ -73,7 +79,8 @@ export class Storage {
     static searchElement(searchStr) {
         const searchedResult = []
         const re = new RegExp(searchStr, 'i');
-        for (let category in Storage.todoObjstorage) {
+        let todoObjStorage = Storage.getObjStorage();
+        for (let category in todoObjStorage) {
             const currentCategory = Storage.getElemByCategory(category);
             if (currentCategory === null) return;
             for (let elem of currentCategory) {
@@ -84,4 +91,3 @@ export class Storage {
         return searchedResult;
     }
 }
-

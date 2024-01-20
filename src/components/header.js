@@ -58,7 +58,7 @@ function handleMenuButtonEvents(event) {
     }
 
     if (targetID === 'categorized') {
-        const categorizedTodoObj = Object.keys(Storage.todoObjstorage)
+        const categorizedTodoObj = Object.keys(Storage.getObjStorage())
                                     .filter(category => category != "all");
         for (let category of categorizedTodoObj) {
             const todoObjects = Storage.getElemByCategory(category);
@@ -69,7 +69,7 @@ function handleMenuButtonEvents(event) {
             }
         }
     } else if (targetID === "uncatagorized") {
-        const uncategorizedTodoObj = Object.keys(Storage.todoObjstorage)
+        const uncategorizedTodoObj = Object.keys(Storage.getObjStorage())
                                     .filter(category => category === "all");
         for (let category of uncategorizedTodoObj) {
             const todoObjects = Storage.getElemByCategory(category);
@@ -80,7 +80,7 @@ function handleMenuButtonEvents(event) {
             }
         }
     } else if (targetID === "notes") {
-        const allCategory = Object.keys(Storage.todoObjstorage);
+        const allCategory = Object.keys(Storage.getObjStorage());
         for (let category of allCategory) {
             const todoObjects = Storage.getElemByCategory(category);
             for (let todoObj of todoObjects) {
