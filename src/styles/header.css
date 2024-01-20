@@ -145,6 +145,10 @@
         display: block;
     }
 
+    #header-right-child {
+        margin-top: 60px;
+    }
+
     #header {
         position: relative;
         top: 0;
