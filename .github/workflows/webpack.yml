@@ -24,5 +24,5 @@ jobs:
 
     - name: Build
       run: |
-        npm install
+        npm install wepack webpack-cli html-webpack-plugin webpack-dev-server style-loader css-loader postcss-loader postcss-preset-env webpack-merge terser-webpack-plugin
         npx webpack
