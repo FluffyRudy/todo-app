@@ -144,9 +144,9 @@
     #header-left-child, #header-right-child {
         display: block;
     }
-
+   
     #header {
-        flex-direction: column;
+        display: block;
     }
 
     #menu-button {
@@ -163,12 +163,24 @@
     }
 
     #logo {
-        font-size: 5vw;
-        margin: 0;
+        font-size: 5vmax;
+        width: 100%;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 1vh;
     }
-
+    
     #search-bar, #search-button {
         display: block;
         margin: auto;
+    }
+
+    #search-bar {
+        padding: 2vh 1vw;
+    }
+
+    #search-button {
+        padding: 1.5vh 4vw;
+        margin-top: 1vh;
     }
 }
